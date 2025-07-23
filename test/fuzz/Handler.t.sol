@@ -8,7 +8,7 @@ import {DecentralizedStableCoin} from "src/DecentralizedStableCoin.sol";
 import {ERC20Mock} from "@openzeppelin/contracts/mocks/token/ERC20Mock.sol";
 import {MockV3Aggregator} from "test/Mocks/MockV3Aggregator.sol";
 
-contract Handler is Test{
+contract Handler is Test {
     DSCEngine dsce;
     DecentralizedStableCoin dsc;
 
@@ -19,7 +19,7 @@ contract Handler is Test{
     address[] public usersWithCollateralDeposited;
     MockV3Aggregator public ethUsdPriceFeed;
 
-    uint256 MAX_DEPOSIT_SIZE = type(uint96).max; // the max uint96 value 
+    uint256 MAX_DEPOSIT_SIZE = type(uint96).max; // the max uint96 value
 
     constructor(DSCEngine _dscEngine, DecentralizedStableCoin _dsc) {
         dsce = _dscEngine;
@@ -33,19 +33,19 @@ contract Handler is Test{
     }
 
     function mintDsc(uint256 amount, uint256 addressSeed) public {
-           if (usersWithCollateralDeposited.length == 0){
+        if (usersWithCollateralDeposited.length == 0) {
             return;
         }
         address sender = usersWithCollateralDeposited[addressSeed % usersWithCollateralDeposited.length];
         (uint256 totalDscMinted, uint256 collateralValueInUsd) = dsce.getAccountInformation(sender);
 
         int256 maxDscToMint = (int256(collateralValueInUsd) / 2) - int256(totalDscMinted);
-        if(maxDscToMint < 0){
+        if (maxDscToMint < 0) {
             return;
         }
-        
+
         amount = bound(amount, 1, uint256(maxDscToMint));
-        if (amount == 0){
+        if (amount == 0) {
             return;
         }
 
@@ -55,7 +55,7 @@ contract Handler is Test{
         timesMintIsCalled++;
     }
 
-    function depositCollateral(uint256 collateralSeed, uint256 amountCollateral) public{
+    function depositCollateral(uint256 collateralSeed, uint256 amountCollateral) public {
         ERC20Mock collateral = _getCollateralFromSeed(collateralSeed);
         amountCollateral = bound(amountCollateral, 1, MAX_DEPOSIT_SIZE);
 
@@ -72,14 +72,13 @@ contract Handler is Test{
         ERC20Mock collateral = _getCollateralFromSeed(collateralSeed);
         uint256 maxCollateralToRedeem = dsce.getCollateralBalanceOfUser(address(collateral), msg.sender);
         amountCollateral = bound(amountCollateral, 0, maxCollateralToRedeem);
-        if (amountCollateral == 0){
+        if (amountCollateral == 0) {
             return;
         }
         dsce.depositCollateral(address(collateral), amountCollateral);
     }
 
-
-    // This breaks our invariant test suite!!! 
+    // This breaks our invariant test suite!!!
     /* function updateCollateralPrice(uint96 newPrice) public {
         int256 newPriceInt = int256(uint256(newPrice));
         ethUsdPriceFeed.updateAnswer(newPriceInt);
@@ -88,12 +87,10 @@ contract Handler is Test{
 
     // Helper function
 
-    function _getCollateralFromSeed(uint256 collateralSeed) private view returns(ERC20Mock){
-        if (collateralSeed % 2 == 0){
+    function _getCollateralFromSeed(uint256 collateralSeed) private view returns (ERC20Mock) {
+        if (collateralSeed % 2 == 0) {
             return weth;
         }
         return wbtc;
     }
-
-
 }

@@ -18,7 +18,7 @@ import {HelperConfig} from "script/HelperConfig.s.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {Handler} from "test/fuzz/Handler.t.sol";
 
-contract Invariants is StdInvariant, Test{
+contract Invariants is StdInvariant, Test {
     DeployDSC deployer;
     DSCEngine dsce;
     Handler handler;
@@ -27,7 +27,7 @@ contract Invariants is StdInvariant, Test{
     address weth;
     address wbtc;
 
-    function setUp() external{
+    function setUp() external {
         deployer = new DeployDSC();
         (dsc, dsce, config) = deployer.run();
         (,, weth, wbtc,) = config.activeNetworkConfig();
@@ -38,7 +38,7 @@ contract Invariants is StdInvariant, Test{
         // targetContract(address(dsce));
     }
 
-    function invariant_protocolMustHaveMoreValueThanTotalSupply() public view{
+    function invariant_protocolMustHaveMoreValueThanTotalSupply() public view {
         // get the view of all the collateral in the protocol
         // compare it to all the debt (dsc)
 
@@ -54,12 +54,11 @@ contract Invariants is StdInvariant, Test{
         console.log("total supply: ", totalSupply);
         console.log("Times mint called: ", handler.timesMintIsCalled());
 
-        assert (wethValue + wbtcValue >= totalSupply);
+        assert(wethValue + wbtcValue >= totalSupply);
     }
 
     function invariant_gettersShouldNotRevert() public view {
         dsce.getLiquidationBonus();
         dsce.getPrecision();
-    } 
+    }
 }
-

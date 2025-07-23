@@ -60,7 +60,7 @@ contract DSCEngine is ReentrancyGuard {
     ///////////////////////
     // Types             //
     ///////////////////////
-    using OracleLib for AggregatorV3Interface; 
+    using OracleLib for AggregatorV3Interface;
 
     ////////////////////////////
     // State Variables       //
@@ -321,10 +321,7 @@ contract DSCEngine is ReentrancyGuard {
         return _calculateHealthFactor(totalDscMinted, collateralValueInUsd);
     }
 
-    function _calculateHealthFactor(
-        uint256 totalDscMinted,
-        uint256 collateralValueInUsd
-    )
+    function _calculateHealthFactor(uint256 totalDscMinted, uint256 collateralValueInUsd)
         internal
         pure
         returns (uint256)
@@ -333,7 +330,6 @@ contract DSCEngine is ReentrancyGuard {
         uint256 collateralAdjustedForThreshold = (collateralValueInUsd * LIQUIDATION_THRESHOLD) / LIQUIDATION_PRECISION;
         return (collateralAdjustedForThreshold * PRECISION) / totalDscMinted;
     }
-
 
     // 1. Check health factor (do they have enough collateral?)
     // 2. Revert if they don't have a good health factor
@@ -397,7 +393,7 @@ contract DSCEngine is ReentrancyGuard {
         _redeemCollateral(from, to, tokenCollateralAddress, amountCollateral);
     }
 
-    function callRevertIfHealthFactorIsBroken(address user) external view{
+    function callRevertIfHealthFactorIsBroken(address user) external view {
         _revertIfHealthFactorIsBroken(user);
     }
 

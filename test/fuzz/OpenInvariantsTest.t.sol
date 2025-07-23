@@ -47,4 +47,3 @@ contract InvariantsTest is StdInvariant, Test{
     }
 }
 */
-

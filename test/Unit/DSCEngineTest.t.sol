@@ -20,11 +20,7 @@ contract DSCEngineTest is Test {
     address btcUsdPriceFeed;
     address weth;
 
-    event collateralDeposited(
-        address indexed user,
-        address indexed token,
-        uint256 indexed amount
-    );
+    event collateralDeposited(address indexed user, address indexed token, uint256 indexed amount);
 
     address public USER = makeAddr("user");
     uint256 public constant AMOUNT_COLLATERAL = 10 ether;
@@ -37,8 +33,7 @@ contract DSCEngineTest is Test {
         deployer = new DeployDSC();
         (dsc, dsce, config) = deployer.run();
 
-        (ethUsdPriceFeed, btcUsdPriceFeed, weth, , ) = config
-            .activeNetworkConfig();
+        (ethUsdPriceFeed, btcUsdPriceFeed, weth,,) = config.activeNetworkConfig();
         ERC20Mock(weth).mint(USER, STARTING_ERC20_BALANCE);
     }
 
@@ -54,11 +49,7 @@ contract DSCEngineTest is Test {
         priceFeedAddresses.push(ethUsdPriceFeed);
         priceFeedAddresses.push(btcUsdPriceFeed);
 
-        vm.expectRevert(
-            DSCEngine
-                .DSCEngine__tokenAddressesAndPriceFeedAddressesMustBeSameLength
-                .selector
-        );
+        vm.expectRevert(DSCEngine.DSCEngine__tokenAddressesAndPriceFeedAddressesMustBeSameLength.selector);
         new DSCEngine(tokenAddresses, priceFeedAddresses, address(dsc));
     }
 
@@ -113,18 +104,11 @@ contract DSCEngineTest is Test {
         _;
     }
 
-    function testCanDepositCollateralAndGetAccountInfo()
-        public
-        depositedCollateral
-    {
-        (uint256 totalDscMinted, uint256 collateralValueInUsd) = dsce
-            .getAccountInformation(USER);
+    function testCanDepositCollateralAndGetAccountInfo() public depositedCollateral {
+        (uint256 totalDscMinted, uint256 collateralValueInUsd) = dsce.getAccountInformation(USER);
 
         uint256 expectedTotalDscMinted = 0;
-        uint256 expectedDepositAmount = dsce.getTokenAmountFromUsd(
-            weth,
-            collateralValueInUsd
-        );
+        uint256 expectedDepositAmount = dsce.getTokenAmountFromUsd(weth, collateralValueInUsd);
         assertEq(totalDscMinted, expectedTotalDscMinted);
         assertEq(AMOUNT_COLLATERAL, expectedDepositAmount);
     }
@@ -166,10 +150,7 @@ contract DSCEngineTest is Test {
     }
 
     // Next is burnDsc
-    function testIfBurnDscImprovesUserHealthFactor()
-        public
-        depositedCollateral
-    {
+    function testIfBurnDscImprovesUserHealthFactor() public depositedCollateral {
         vm.startPrank(USER);
 
         // First mint some DSC to create debt
