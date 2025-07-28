@@ -154,4 +154,4 @@ forge fmt
 Follow me on Twitter and LinkedIn!
 
 ![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/mibunna)
-![Static Badge](https://img.shields.io/badge/LinkedIn%2C%20faheez-adekunle)
+![Static Badge](https://img.shields.io/badge/LinkedIn%20faheez-adekunle)
