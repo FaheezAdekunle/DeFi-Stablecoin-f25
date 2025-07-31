@@ -10,6 +10,20 @@ This is a practice section of the Cyfrin Foundry Solidity Course.
 
 This project is meant to be a stablecoin where users can deposit WETH and WBTC in exchange for a token that will be pegged to the USD.
 
+* What are Stablecoins?
+A Stablecoin is a non-volatile crypto asset, it's a crypto asset whose buying power fluctuates very little relative to the rest of the market.
+
+* Why we care
+Stablecoins can be used as:
+- Storage of value
+- Unit of account
+- Medium of exchange
+
+* Categories
+- Fiat-Backed [Government backed] examples- USDC, USDT
+- Crypto-Backed [ Decentralised ] examples- DAI, LUSD
+- Algorithmic [Supply demand logic] examples- FRAX, UST.
+
 - [DeFi Stablecoin](#defi-stablecoin)
 - [About](#about)
 - [Getting Started](#getting-started)
