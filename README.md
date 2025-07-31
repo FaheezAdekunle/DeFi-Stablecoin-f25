@@ -13,11 +13,11 @@ This project is meant to be a stablecoin where users can deposit WETH and WBTC i
 * What are Stablecoins?
 A Stablecoin is a non-volatile crypto asset, it's a crypto asset whose buying power fluctuates very little relative to the rest of the market.
 
-* Why we care
+* Why we care-
 Stablecoins can be used as:
-- Storage of value
-- Unit of account
-- Medium of exchange
+1. Storage of value
+2. Unit of account
+3. Medium of exchange
 
 * Categories
 - Fiat-Backed [Government backed] examples- USDC, USDT
