@@ -19,10 +19,10 @@ Stablecoins can be used as:
 2. Unit of account
 3. Medium of exchange
 
-* Categories
-- Fiat-Backed [Government backed] examples- USDC, USDT
-- Crypto-Backed [ Decentralised ] examples- DAI, LUSD
-- Algorithmic [Supply demand logic] examples- FRAX, UST.
+* Categories:
+1. Fiat-Backed [Government backed] examples- USDC, USDT
+2. Crypto-Backed [ Decentralised ] examples- DAI, LUSD
+3. Algorithmic [Supply demand logic] examples- FRAX, UST.
 
 - [DeFi Stablecoin](#defi-stablecoin)
 - [About](#about)
